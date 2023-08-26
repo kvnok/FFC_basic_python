@@ -4,7 +4,6 @@ def calc_new_time_and_days(start, duration):
 	#convert start to datatime object
 	time_format = "%I:%M %p"
 	start_datetime = datetime.strptime(start, time_format)
-	# print(start_datetime)
 	#parse duration for hours and minutes
 	hours, minutes = map(int, duration.split(":"))
 	s_hrs = int(start.split(":")[0])
