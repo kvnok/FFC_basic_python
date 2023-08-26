@@ -2,19 +2,6 @@ from time_calculator import add_time
 from unittest import main
 # main(module='test_module', exit=False)
 
-# 
-# "3:07 PM"
-# "2:45 AM (next day)"
-# "12:05 PM"
-# "2:59 AM (next day)"
-# "12:04 AM (2 days later)"
-# "6:18 AM (20 days later)"
-# "5:01 AM"
-# "5:42 PM, Monday"
-# "2:59 AM, Sunday (next day)"
-# "12:04 AM, Friday (2 days later)"
-# "6:18 AM, Monday (20 days later)"
-
 print(add_time("3:30 PM", "2:12") + " -> 5:42 PM")
 print(add_time("11:55 AM", "3:12") + " -> 3:07 PM")
 print(add_time("9:15 PM", "5:30") + " -> 2:45 AM (next day)")
