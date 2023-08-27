@@ -23,9 +23,16 @@ def arithmetic_arranger(problems, display=None):
 			return error_strings[2]
 		if len(entry[0]) > 4 or len(entry[2]) > 4:
 			return error_strings[3]
-
+	#filling rows
+	spacing = ' ' * 4
+	first = ""
+	second = ""
+	third = ""
+	fourth = ""
+	
 	if display is not None:
 		if display is True:
-			print("display is set to True")
-	return "test"
+			third += "\n"
+	# return "test"
+	arranged_problems = first + second + third + fourth
 	return arranged_problems

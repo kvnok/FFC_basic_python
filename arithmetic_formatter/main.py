@@ -6,6 +6,7 @@ from arithmetic_arranger import arithmetic_arranger
 #python3 main.py
 # print(arithmetic_arranger(["1", "2", "3", "4", "5", "6"]))
 print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"]))
+print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"], True))
 
 #error tests
 # print(arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49", "1345 + 632", "1734 - 215"]))
