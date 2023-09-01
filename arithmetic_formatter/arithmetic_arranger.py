@@ -13,7 +13,7 @@ def arithmetic_arranger(problems, display=None):
 	problem_count = 0
 	for entry in problems:
 		problem_count += 1
-		if problem_count == 5:
+		if problem_count == 6:
 			return error_strings[0]
 		entry = entry.split(" ")
 		problem_arr.append(Problem(entry[0], entry[1], entry[2]))
@@ -29,10 +29,30 @@ def arithmetic_arranger(problems, display=None):
 	second = ""
 	third = ""
 	fourth = ""
-	
+	arr_len = len(problem_arr)
+	i = 0
+	while i < arr_len:
+		total = len(problem_arr[i].n1)
+		if len(problem_arr[i].n2) > len(problem_arr[i].n1):
+			total = len(problem_arr[i].n2)
+		total += 2
+		first += (total - len(problem_arr[i].n1)) * ' '
+		second += problem_arr[i].op + (total - len(problem_arr[i].n2) -1) * ' '
+		first += problem_arr[i].n1
+		second += problem_arr[i].n2
+		third += ('_' * total)
+		sum = int(problem_arr[i].n1) + int(problem_arr[i].n2)
+		fourth += (total - len(str(sum))) * ' ' + str(sum)
+		if i != arr_len - 1:
+			first += spacing
+			second += spacing
+			third += spacing
+			fourth += spacing
+		i += 1
+	first += "\n"
+	second += "\n"
+	arranged_problems = first + second + third
 	if display is not None:
-		if display is True:
-			third += "\n"
-	# return "test"
-	arranged_problems = first + second + third + fourth
+		if display == True:
+			arranged_problems += "\n" + fourth
 	return arranged_problems
