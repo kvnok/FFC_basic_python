@@ -1,3 +1,13 @@
+"""
+thoughts:
+deposit is unclear
+how does the ledger work
+when wanting to print the 'budget' object, what is called
+basicly check the test_module for how the functions are called and what is expected for return
+leave it for now and pick it up later
+
+"""
+
 class Category:
 	"""
 	gets a name for the ledger (the balance overview)
@@ -18,7 +28,7 @@ class Category:
 	If there are not enough funds, nothing should be added to the ledger.
 	This method should return True if the withdrawal took place, and False otherwise.
 	"""
-	def withdraw(amount, description, self):
+	def withdraw(amount, description=None, self):
 		print("yep")
 	"""
 	get_balance method that returns the current balance of the budget category based on the deposits and withdrawals that have occurred.
