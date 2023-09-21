@@ -33,8 +33,8 @@ class Category:
 				n = n[:7]
 			else:
 				n = (" " * (7 - len(n))) + n
-			overview = overview + tag + n + "\n"
-		overview = overview + "Total: " + "{:.2f}".format(self.balance)
+			overview += tag + n + "\n"
+		overview += "Total: " + "{:.2f}".format(self.balance)
 		return overview
 	
 	"""
@@ -44,7 +44,7 @@ class Category:
 	in the form of {"amount": amount, "description": description}.
 	"""
 	def deposit(self, amount, description=""):
-		self.balance = self.balance + amount
+		self.balance += amount
 		temp = {"amount":amount, "description": description}
 		self.ledger.append(temp)
 	
@@ -57,7 +57,7 @@ class Category:
 	def withdraw(self, amount, description=""):
 		if self.balance < amount:
 			return False
-		self.balance = self.balance - amount
+		self.balance -= amount
 		temp = {"amount":amount*-1, "description": description}
 		self.ledger.append(temp)
 		return True
@@ -97,8 +97,16 @@ class Category:
 		return True
 
 """
-get a list of categories and create a chart like the following with exact same kind of spacing:
+The chart should show the percentage spent in each category passed in to the function.
+The percentage spent should be calculated only with withdrawals and not with deposits.
+Down the left side of the chart should be labels 0 - 100.
+The "bars" in the bar chart should be made out of the "o" character.
+The height of each bar should be rounded down to the nearest 10.
+The horizontal line below the bars should go two spaces past the final bar.
+Each category name should be written vertically below the bar.
+There should be a title at the top that says "Percentage spent by category".
 
+EXAMPLE:
 Percentage spent by category
 100|          
  90|          
@@ -122,4 +130,57 @@ Percentage spent by category
         g
 """
 def create_spend_chart(categories):
-	print(categories)
+	top = "Percentage spent by category\n"
+	overview = ""
+	overview += top
+	costs = []
+	for name in categories:
+		sub_total = 0
+		for entry in name.ledger:
+			spend = entry["amount"]
+			if spend < 0:
+				sub_total += (spend * -1)
+		costs.append(sub_total)
+	total = 0
+	for entry in costs:
+		total += entry
+	# print(costs)
+	# print(total)
+	ratios = []
+	for entry in costs:
+		percent = entry / total * 100
+		ratios.append(percent)
+	# print(ratios)
+	percent_num = 100
+	while(percent_num >= 0):
+		overview += str(percent_num).rjust(3) + "|"
+		for n in ratios:
+			overview += " "
+			if n > percent_num:
+				overview += "o"
+			else:
+				overview += " "
+			overview += " "
+		overview += " \n"
+		percent_num += - 10
+	cat_len = len(categories)
+	overview += (" " * 4) + ("---" * cat_len) + "-" + "\n"
+	
+	longest_one = 0
+	for entry in categories:
+		if len(entry.name) > longest_one:
+			longest_one = len(entry.name)
+	# print(longest_one)
+	names_length = []
+	for cat in categories:
+		names_length.append(len(cat.name))
+	for i in range(longest_one):
+		overview += (" " * 4)
+		for j in range(cat_len):
+			if i >= names_length[j]:
+				overview += (" " * 3)
+			else:
+				overview += " " + categories[j].name[i] + " "
+		overview += " \n"
+	# print(overview)
+	return overview.rstrip("\n")
